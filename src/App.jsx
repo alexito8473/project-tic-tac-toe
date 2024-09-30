@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { Square, SeePiece } from './square'
+import { Square, SeePiece } from './Square.jsx'
 
 const TURN = {
   X: "x",
