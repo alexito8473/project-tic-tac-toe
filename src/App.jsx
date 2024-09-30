@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { Square, SeePiece } from './Square.jsx'
-
+import { XCircle, Circle } from 'lucide-react'
 const TURN = {
   X: "x",
   O: "o"
@@ -35,8 +35,8 @@ function comprobarGanador(board) {
         board[direction.FORM[0] + (i * direction.SUM)] != null &&
         board[direction.FORM[1] + (i * direction.SUM)] != null &&
         board[direction.FORM[2] + (i * direction.SUM)] != null &&
-        board[direction.FORM[0] + (i * direction.SUM)] == board[direction.FORM[1 ]+ (i * direction.SUM)] &&
-        board[direction.FORM[0] + (i * direction.SUM)] == board[direction.FORM[2 ]+ (i * direction.SUM)]) {
+        board[direction.FORM[0] + (i * direction.SUM)] == board[direction.FORM[1] + (i * direction.SUM)] &&
+        board[direction.FORM[0] + (i * direction.SUM)] == board[direction.FORM[2] + (i * direction.SUM)]) {
         winner = { winner: true, ubication: [direction.FORM[0] + (i * direction.SUM), direction.FORM[1] + (i * direction.SUM), direction.FORM[2] + (i * direction.SUM)] }
       }
     }
@@ -47,7 +47,7 @@ function comprobarGanador(board) {
 function App() {
 
   const [board, setBoard] = useState(Array(9).fill(null))
-  const [resultWinner,setResultWinner]=useState({ winner: false, ubication: [null, null,null] })
+  const [resultWinner, setResultWinner] = useState({ winner: false, ubication: [null, null, null] })
   const [turn, setTurn] = useState(TURN.X)
   function updateBoard(index) {
     let comprobarWinner;
@@ -56,46 +56,51 @@ function App() {
     const newBoard = [...board]
     newBoard[index] = turn
     setTurn(turn == TURN.X ? TURN.O : TURN.X)
-    comprobarWinner=comprobarGanador(newBoard);
+    comprobarWinner = comprobarGanador(newBoard);
     console.log(comprobarWinner)
-    if(comprobarWinner.winner){
+    if (comprobarWinner.winner) {
       setResultWinner(comprobarGanador(newBoard))
     }
     setBoard(newBoard);
   }
 
   return (
-    <>
+   
       <main className='board'>
-        <h1>Tic tac toe</h1>
-        <section className='game'>
+       <>
+        <h1>Tic tac toe</h1 >
+        <section className='game' >
           {
             board.map((_, index) => {
               return (<Square
                 key={index}
-                piece={board[index]}
+                isPieceX={board[index] == null ? null : board[index] == TURN.X}
                 index={index}
                 updateTheBoard={updateBoard}
-                winner={resultWinner.ubication.some(element=>element==index)}
+                winner={resultWinner.ubication.some(element => element == index)}
               />)
             })
           }
         </section>
-      </main>
-      <section>
+        <section key="content" >
         <>
-          {resultWinner.winner ? <h1>He ganado</h1> : <h1>No he ganado</h1>}
-          {SeePiece({
-            piece: TURN.X,
+          {resultWinner.winner ? <h1 className="subTitle">He ganado</h1> : <h1 className="subTitle">No he ganado</h1>}
+          {SeePiece({  
+            key:"x",  
+            piece: <XCircle className="cell_content"/>,
             isActive: turn == TURN.X
           })}
           {SeePiece({
-            piece: TURN.O,
+             key:"o",  
+            piece: <Circle className="cell_content" />,
             isActive: turn == TURN.O
           })}
-        </>
+       </>
       </section>
-    </>
+      </>
+      </main>
+     
+    
   )
 }
 

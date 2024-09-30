@@ -3,7 +3,23 @@
 }
 #root {
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+}
+.game{
+  display: flex;
+  align-content: center;
+  flex-flow: wrap;
+  gap: 20px;
+  width: 400px;
+}
+@media (max-width: 500px) {
+  .subTitle {
+    font-size: 30px;
+   }
+  .game{
+    width: 70%;
+    min-width: 240px;
+    max-width: 300px;
+  }
 }
 
