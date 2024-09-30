@@ -18,8 +18,9 @@
    }
   .game{
     width: 70%;
-    min-width: 240px;
-    max-width: 300px;
+    margin: 0 auto;
+    min-width: 280px;
+    max-width: 400px;
   }
 }
 
