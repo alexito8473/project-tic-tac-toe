@@ -1,16 +1,54 @@
 *{
   box-sizing: border-box;
+  margin: 0;
 }
 #root {
-  margin: 0 auto;
   text-align: center;
+  margin: 0;
+}
+.screen{
+ width: 100vw;
+ height: 100vh;
+ z-index: -1100; /* Asegura que esté detrás del contenido */
+}
+.board{
+  z-index: 1;
+}
+.board,.screen{
+  background: linear-gradient(270deg, #ff7e5f, #feb47b);
+ background-size: 400% 400%;
+ animation: moveBackground 15s ease infinite;
+}
+.space{
+  padding: 30px;
 }
 .game{
+  margin: 0 auto;
   display: flex;
   align-content: center;
   flex-flow: wrap;
   gap: 20px;
   width: 400px;
+}
+
+.custom_button {
+  background-color: rgba(153, 205, 50, 0.602); /* Color de fondo verde */
+  color: white; /* Color del texto */
+  padding: 15px 32px;
+  font-size: 16px;
+  margin-bottom: 30px;
+  border: none; /* Sin bordes */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: all 0.2s linear;
+}
+.custom_button:hover{
+  background-color: rgba(153, 205, 50, 0.837);
+}
+
+@keyframes moveBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 @media (max-width: 500px) {
   .subTitle {
